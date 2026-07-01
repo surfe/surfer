@@ -29,7 +29,7 @@ jobs:
           private-key: ${{ secrets.SURFE_GO_APP_PRIVATE_KEY }}
           owner: Surfe
           repositories: homebrew-tap
-      - uses: goreleaser/goreleaser-action@v6
+      - uses: goreleaser/goreleaser-action@v7
         with:
           version: '~> v2'
           args: release --clean
