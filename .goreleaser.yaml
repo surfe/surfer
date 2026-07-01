@@ -2,6 +2,8 @@ version: 2
 project_name: surfer
 brews:
   - name: surfer
+    # Publish into the tap's Formula/ directory (Homebrew's conventional location).
+    directory: Formula
     repository:
       owner: Surfe
       name: homebrew-tap
