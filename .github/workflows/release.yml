@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  goreleaser:
+    name: GoReleaser
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      # Mint a short-lived token (scoped to the tap repo) from the surfe-go-modules
+      # GitHub App, so GoReleaser can commit the generated formula to Surfe/homebrew-tap.
+      - name: Generate Homebrew tap token
+        id: tap-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: "4138605" # surfe-go-modules
+          private-key: ${{ secrets.SURFE_GO_APP_PRIVATE_KEY }}
+          owner: Surfe
+          repositories: homebrew-tap
+      - uses: goreleaser/goreleaser-action@v6
+        with:
+          version: '~> v2'
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_GITHUB_TOKEN: ${{ steps.tap-token.outputs.token }}

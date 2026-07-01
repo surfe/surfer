@@ -1,0 +1,19 @@
+version: "2"
+
+linters:
+  default: none
+  enable:
+    - govet
+    - staticcheck
+    - unused
+    - ineffassign
+
+  settings:
+    staticcheck:
+      checks:
+        - "all"
+        - "-SA1019"  # ignore deprecation warnings
+        - "-ST1000"  # package comments
+        - "-ST1003"  # naming conventions (e.g. accountId vs accountID)
+        - "-ST1020"  # comment format on exported methods
+        - "-QF1012"  # use fmt.Fprintf instead of WriteString(fmt.Sprintf)

@@ -1,0 +1,69 @@
+version: 2
+project_name: surfer
+brews:
+  - name: surfer
+    repository:
+      owner: Surfe
+      name: homebrew-tap
+      branch: main
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: "https://github.com/Surfe/surfer"
+    description: "Command-line client for the Surfe API (search & enrich people and companies)"
+    license: "MIT"
+    commit_author:
+      name: surfe-bot
+      email: bot@surfe.com
+    install: |
+      bin.install "surfer"
+    test: |
+      system "#{bin}/surfer", "version"
+builds:
+- main: ./main.go
+  goos:
+    - darwin
+    - linux
+  goarch:
+    - amd64
+    - arm64
+  ldflags:
+    - -X github.com/Surfe/surfer/pkg.BuildVersion={{.Version}}
+    - -X github.com/Surfe/surfer/pkg.BuildCommit={{.ShortCommit}}
+    - -X github.com/Surfe/surfer/pkg.BuildTime={{.Timestamp}}
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  version_template: "{{ .Tag }}-next"
+release:
+  header: |
+    ```
+       _____ __  ______  ________________
+      / ___// / / / __ \/ ____/ ____/ __ \
+      \__ \/ / / / /_/ / /_  / __/ / /_/ /
+     ___/ / /_/ / _, _/ __/ / /___/ _, _/
+    /____/\____/_/ |_/_/   /_____/_/ |_|
+    ```
+
+    **Download:** grab the archive for your platform below.
+  footer: |
+    ---
+    **Full Changelog**: https://github.com/Surfe/surfer/compare/{{ .PreviousTag }}...{{ .Tag }}
+changelog:
+  sort: asc
+  groups:
+    - title: "🚀 New Features"
+      regexp: '^.*?feat(\(.+\))??!?:.+$'
+      order: 0
+    - title: "🐛 Bug Fixes"
+      regexp: '^.*?fix(\(.+\))??!?:.+$'
+      order: 1
+    - title: "🔨 Refactoring"
+      regexp: '^.*?refac(\(.+\))??!?:.+$'
+      order: 2
+    - title: "🧹 Maintenance"
+      order: 999
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^Merge'
