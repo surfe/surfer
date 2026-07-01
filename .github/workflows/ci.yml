@@ -38,3 +38,7 @@ jobs:
       - uses: golangci/golangci-lint-action@v9
         with:
           version: v2.1.6
+          # Build golangci-lint from source with the repo's Go toolchain (1.26+).
+          # The prebuilt binaries are built with an older Go and refuse to run
+          # against a newer go.mod language version.
+          install-mode: goinstall
