@@ -17,11 +17,18 @@ Built for developers, sales engineers, and AI agents that need programmatic acce
 ### Homebrew (recommended)
 
 ```bash
-brew install surfe/tap/surfer
+brew install surfe/tap/surfer-cli
 ```
 
-To upgrade later: `brew upgrade surfer`. (First time only, you can also run
-`brew tap surfe/tap` and then `brew install surfer`.)
+The formula is `surfer-cli` (to avoid a name clash with an unrelated
+`surfer` in homebrew-core), but it installs the **`surfer`** command:
+
+```bash
+surfer version
+```
+
+To upgrade later: `brew upgrade surfer-cli`. (First time only, you can also run
+`brew tap surfe/tap` and then `brew install surfer-cli`.)
 
 ### From GitHub Releases
 
