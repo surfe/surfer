@@ -1,0 +1,14 @@
+# Compiled binary
+/surfer
+
+# Test / coverage artifacts
+*.out
+coverage.*
+
+# goreleaser output
+/dist/
+
+# OS / editor cruft
+.DS_Store
+
+demo.sh
