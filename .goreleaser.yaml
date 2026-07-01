@@ -1,7 +1,9 @@
 version: 2
 project_name: surfer
 brews:
-  - name: surfer
+    # Formula is named surfer-cli to avoid the homebrew-core `surfer` collision;
+    # the installed binary/command is still `surfer`.
+  - name: surfer-cli
     # Publish into the tap's Formula/ directory (Homebrew's conventional location).
     directory: Formula
     repository:
