@@ -23,7 +23,7 @@ jobs:
       # GitHub App, so GoReleaser can commit the generated formula to Surfe/homebrew-tap.
       - name: Generate Homebrew tap token
         id: tap-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v3
         with:
           app-id: "4138605" # surfe-go-modules
           private-key: ${{ secrets.SURFE_GO_APP_PRIVATE_KEY }}
