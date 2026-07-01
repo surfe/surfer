@@ -201,8 +201,9 @@ func StartLogin() (*TokenStore, error) {
 	port := listener.Addr().(*net.TCPAddr).Port
 	callbackURL := fmt.Sprintf("http://localhost:%d/callback", port)
 
-	authURL := fmt.Sprintf("%s/oauth/authorize?redirect_uri=%s&code_challenge=%s&code_challenge_method=S256&state=%s",
+	authURL := fmt.Sprintf("%s/oauth/authorize?client_id=%s&response_type=code&redirect_uri=%s&code_challenge=%s&code_challenge_method=S256&state=%s",
 		AuthBaseURL(),
+		url.QueryEscape(ClientID()),
 		callbackURL,
 		challenge,
 		url.QueryEscape(state),
